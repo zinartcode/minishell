@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strnjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/04/29 16:43:13 by azinnatu         ###   ########.fr       */
+/*   Created: 2017/08/26 14:37:08 by azinnatu          #+#    #+#             */
+/*   Updated: 2017/12/12 23:12:59 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int		main(void)
+char	*ft_strnjoin(char const *s1, char const *s2, size_t len)
 {
-	ft_printf("%s\n", "yeahhh");
-	return (0);
+	char	*ret;
+
+	ret = NULL;
+	if (s1 && s2)
+	{
+		if ((ret = (char*)ft_memalloc(sizeof(char) * \
+					ft_strlen(s1) + len + 1)) == NULL)
+			return (NULL);
+		ft_strcpy(ret, s1);
+		ft_strncat(ret, s2, len);
+	}
+	return (ret);
 }

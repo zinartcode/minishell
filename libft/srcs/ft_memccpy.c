@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/04/29 16:43:13 by azinnatu         ###   ########.fr       */
+/*   Created: 2017/07/26 15:48:55 by azinnatu          #+#    #+#             */
+/*   Updated: 2017/07/26 15:48:57 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int		main(void)
+void	*ft_memccpy(void *dst, const void *src, int c, size_t len)
 {
-	ft_printf("%s\n", "yeahhh");
-	return (0);
+	while (len)
+	{
+		*((char*)dst) = *((char*)src);
+		dst = (void*)((char*)dst + 1);
+		src = (void*)((char*)src + 1);
+		if ((char)(c) == *((char*)dst - 1))
+		{
+			return (dst);
+		}
+		len--;
+	}
+	return (NULL);
 }

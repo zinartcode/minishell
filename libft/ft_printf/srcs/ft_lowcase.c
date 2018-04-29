@@ -1,19 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lowcase.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/04/29 16:43:13 by azinnatu         ###   ########.fr       */
+/*   Created: 2018/03/29 20:55:22 by azinnatu          #+#    #+#             */
+/*   Updated: 2018/03/29 21:19:46 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "ft_printf.h"
 
-int		main(void)
+void	ft_lowcase(char *str)
 {
-	ft_printf("%s\n", "yeahhh");
-	return (0);
+	int i;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] >= 65 && str[i] <= 90)
+			str[i] += 32;
+	}
 }

@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/04/29 16:43:13 by azinnatu         ###   ########.fr       */
+/*   Created: 2017/07/26 16:08:14 by azinnatu          #+#    #+#             */
+/*   Updated: 2017/07/26 16:08:15 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int		main(void)
+void	ft_putnbr_fd(int n, int fd)
 {
-	ft_printf("%s\n", "yeahhh");
-	return (0);
+	if (n == -2147483648)
+		ft_putstr_fd("-2147483648", fd);
+	else
+		ft_putstr_fd(ft_itoa(n), fd);
 }

@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memalloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/04/29 16:43:13 by azinnatu         ###   ########.fr       */
+/*   Created: 2017/07/26 15:48:39 by azinnatu          #+#    #+#             */
+/*   Updated: 2017/07/26 15:48:51 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
+#include <stdlib.h>
 
-int		main(void)
+void	*ft_memalloc(size_t size)
 {
-	ft_printf("%s\n", "yeahhh");
-	return (0);
+	void	*str;
+
+	str = (void*)malloc(size * sizeof(void*));
+	if (str == NULL)
+	{
+		return (NULL);
+	}
+	ft_bzero(str, size);
+	return (str);
 }

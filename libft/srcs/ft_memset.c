@@ -1,19 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/04/29 16:43:13 by azinnatu         ###   ########.fr       */
+/*   Created: 2017/07/26 16:06:19 by azinnatu          #+#    #+#             */
+/*   Updated: 2017/07/26 16:07:34 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int		main(void)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	ft_printf("%s\n", "yeahhh");
-	return (0);
+	unsigned char	*p;
+
+	p = b;
+	while (len > 0)
+	{
+		*p = c;
+		p++;
+		len--;
+	}
+	return (b);
 }

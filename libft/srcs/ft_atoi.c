@@ -1,19 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/04/29 16:43:13 by azinnatu         ###   ########.fr       */
+/*   Created: 2017/07/26 15:44:23 by azinnatu          #+#    #+#             */
+/*   Updated: 2017/07/26 15:44:46 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int		main(void)
+int		ft_atoi(const char *str)
 {
-	ft_printf("%s\n", "yeahhh");
-	return (0);
+	int		sign;
+	int		res;
+
+	while (*str == ' ' || *str == '\t' || *str == '\n' || *str == '\v'
+					|| *str == '\r' || *str == '\f')
+		str++;
+	res = 0;
+	sign = 1;
+	if (*str == '-' || *str == '+')
+	{
+		sign = (*str == '-' ? -1 : 1);
+		str++;
+	}
+	while (ft_isdigit(*str))
+	{
+		res = (res * 10) + (*str - '0');
+		str++;
+	}
+	return (res * sign);
 }

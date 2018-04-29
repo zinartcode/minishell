@@ -1,19 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/04/29 16:43:13 by azinnatu         ###   ########.fr       */
+/*   Created: 2017/12/12 23:12:10 by azinnatu          #+#    #+#             */
+/*   Updated: 2017/12/12 23:13:12 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int		main(void)
+char	*ft_strncat(char *s1, const char *s2, size_t n)
 {
-	ft_printf("%s\n", "yeahhh");
-	return (0);
+	char	*s;
+
+	s = s1;
+	while (*s)
+	{
+		s++;
+	}
+	while (*s2 && n-- > 0)
+	{
+		*s++ = *s2++;
+	}
+	*s = '\0';
+	return (s1);
 }

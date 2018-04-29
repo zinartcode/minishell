@@ -1,19 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/04/29 16:43:13 by azinnatu         ###   ########.fr       */
+/*   Created: 2017/07/26 16:05:58 by azinnatu          #+#    #+#             */
+/*   Updated: 2017/07/26 16:07:29 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int		main(void)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	ft_printf("%s\n", "yeahhh");
-	return (0);
+	char		*d;
+	const char	*s;
+
+	d = dst;
+	s = src;
+	if (s < d)
+	{
+		s = s + len;
+		d = d + len;
+		while (len-- > 0)
+		{
+			*(--d) = *(--s);
+		}
+	}
+	else
+	{
+		while (len-- > 0)
+		{
+			*d++ = *s++;
+		}
+	}
+	return (dst);
 }

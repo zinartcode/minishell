@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_space.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/04/29 16:43:13 by azinnatu         ###   ########.fr       */
+/*   Created: 2018/03/29 22:20:39 by azinnatu          #+#    #+#             */
+/*   Updated: 2018/04/18 02:40:05 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int		main(void)
+int		ft_space(char *str)
 {
-	ft_printf("%s\n", "yeahhh");
-	return (0);
+	int	space;
+	int	i;
+
+	space = 0;
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == ' ')
+			space++;
+	}
+	return (space);
 }

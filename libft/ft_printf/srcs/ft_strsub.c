@@ -1,19 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/04/29 16:43:13 by azinnatu         ###   ########.fr       */
+/*   Created: 2018/03/29 20:55:22 by azinnatu          #+#    #+#             */
+/*   Updated: 2018/03/29 21:20:26 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "ft_printf.h"
 
-int		main(void)
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	ft_printf("%s\n", "yeahhh");
-	return (0);
+	unsigned	int	i;
+	char			*str;
+
+	if ((str = ft_strnew(len)) && s)
+	{
+		i = 0;
+		while (i < len)
+		{
+			str[i] = s[start + i];
+			i++;
+		}
+		str[i] = '\0';
+		return (str);
+	}
+	return (NULL);
 }

@@ -1,19 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/04/29 16:43:13 by azinnatu         ###   ########.fr       */
+/*   Created: 2017/12/12 23:12:27 by azinnatu          #+#    #+#             */
+/*   Updated: 2017/12/12 23:13:00 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int		main(void)
+char	*ft_strnstr(const char *big, const char *little, size_t n)
 {
-	ft_printf("%s\n", "yeahhh");
-	return (0);
+	size_t	len2;
+
+	if (*little == '\0')
+		return ((char*)big);
+	len2 = ft_strlen(little);
+	while (*big != '\0' && n-- >= len2)
+	{
+		if (*big == *little && ft_memcmp(big, little, len2) == 0)
+			return ((char*)big);
+		big++;
+	}
+	return (NULL);
 }

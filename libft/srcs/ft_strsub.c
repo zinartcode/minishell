@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/04/29 16:43:13 by azinnatu         ###   ########.fr       */
+/*   Created: 2017/12/11 23:48:18 by azinnatu          #+#    #+#             */
+/*   Updated: 2017/12/12 23:14:48 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
+#include <stdlib.h>
 
-int		main(void)
+char	*ft_strsub(const char *s, unsigned int start, size_t len)
 {
-	ft_printf("%s\n", "yeahhh");
-	return (0);
+	char			*sub;
+	unsigned int	index;
+
+	index = 0;
+	if (!s || !(sub = (char*)malloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	while (index < len)
+	{
+		sub[index] = s[start + index];
+		index++;
+	}
+	sub[index] = '\0';
+	return (sub);
 }

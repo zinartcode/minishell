@@ -1,19 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/04/29 16:43:13 by azinnatu         ###   ########.fr       */
+/*   Created: 2017/12/12 23:12:12 by azinnatu          #+#    #+#             */
+/*   Updated: 2017/12/12 23:13:09 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int		main(void)
+int		ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	ft_printf("%s\n", "yeahhh");
+	while (n--)
+	{
+		if (*s1 != *s2)
+		{
+			return ((*(unsigned char *)s1) - (*(unsigned char *)s2));
+		}
+		else if (*s1 == '\0')
+		{
+			return (0);
+		}
+		s1++;
+		s2++;
+	}
 	return (0);
 }
