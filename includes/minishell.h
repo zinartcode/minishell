@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 16:40:47 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/04/30 15:03:36 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/04/30 16:07:05 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define NRM "\x1B[0m"
 
 char		**readinput(void);
-void		replace(char **line);
+void		format_str(char **line);
 
 void		print_env(char **env);
 

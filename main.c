@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/04/30 15:20:34 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/04/30 16:14:36 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,22 @@ int		main(int ac, char **av, char **envp)
 
 	while (1)
 	{
-		ft_putstr_fd(GRN"msh$> "NRM, 1);
+		ft_putstr_fd(GRN"m_sh$> "NRM, 1);
 		cmd = readinput();
+		print_env(cmd);
 		if (cmd[0] && ft_strcmp(cmd[0], "exit") == 0)
 			exit(0);
 		else if (cmd[0] && ft_strcmp(cmd[0], "env") == 0)
 			print_env(env);
 		else if (cmd[0] && ft_strcmp(cmd[0], "setenv") == 0)
-			ft_printf("%s\n", "run setenv"); // envp = ft_setenv(&envp, env);
+			ft_printf("%s\n", "run setenv");
 		else if (cmd[0] && ft_strcmp(cmd[0], "unsetenv") == 0)
-			ft_printf("%s\n", "run unsetenv"); //envp = ft_unsetenv(&envp, env);
+			ft_printf("%s\n", "run unsetenv");
 		else if (cmd[0] && ft_strcmp(cmd[0], "cd") == 0)
-			ft_printf("%s\n", "run cd"); //ft_cd(env, envp);
+			ft_printf("%s\n", "run cd");
 		else
-			ft_printf("%s\n", "else"); //ft_getcommand(envp, env);
+			ft_printf("%s\n", "else");
 	}
-
-	// ft_printf("%s\n", envp[0]);
-	// ft_printf("%s\n", envp[1]);
 
 	// while (get_next_line(0, &str))
 	// {
@@ -65,7 +63,7 @@ void	print_env(char **env)
 	i = 0;
 	while (env[i])
 	{
-		ft_printf("%s\n", env[i]);
+		ft_printf("%s%s", env[i], ".");
 		i++;
 	}
 }
@@ -78,14 +76,14 @@ char	**readinput(void)
 
 	args = 0;
 	get_next_line(0, &command);
-	replace(&command);
-	args = ft_strsplit(command, 5);
+	format_str(&command);
+	args = ft_strsplit(command, ' ');
 	i = 0;
 	while (args && args[i])
 	{
 		if (args[i][0] == '\'' || args[i][0] == '"')
 		{
-			args[i] = args[i] + 1;
+			args[i]++;
 			if (args[i][ft_strlen(args[i]) - 1] == '\'' ||
 					args[i][ft_strlen(args[i]) - 1] == '"')
 				args[i][ft_strlen(args[i]) - 1] = 0;
@@ -95,19 +93,17 @@ char	**readinput(void)
 	return (args);
 }
 
-void	replace(char **line)
+void	format_str(char **line)
 {
 	int	i;
-	int	bet;
 
 	i = 0;
-	bet = 0;
 	while ((*line)[i] != 0)
 	{
-		if ((*line)[i] == ' ')
-			(*line)[i] = 5;
+		if ((*line)[i] == '\t')
+			(*line)[i] = ' ';
 		if ((*line)[i] == '\'' || (*line)[i] == '"')
-			bet = (bet + 1) % 2;
+			;
 		i++;
 	}
 }
