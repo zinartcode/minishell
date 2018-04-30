@@ -6,13 +6,13 @@
 #    By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/29 16:27:03 by azinnatu          #+#    #+#              #
-#    Updated: 2018/04/29 16:34:53 by azinnatu         ###   ########.fr        #
+#    Updated: 2018/04/30 13:24:47 by azinnatu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -g
 CC = gcc
 
 SRC =	main.c 
@@ -45,7 +45,7 @@ $(NAME): $(OBJ)
 	@make -C libft/ft_printf
 	$(CC) $(FLAGS) $(INC) -c $(SRC)
 	$(CC) $(FLAGS) $(LIB) $(OB1) -o $(NAME)
-	@echo "$(GREEN)minishell: creating object files"
+	@echo "Building a minishell..."
 
 rmbin:
 	rm -rf $(NAME)
@@ -60,6 +60,7 @@ clean:
 	@/bin/$(RM) $(OB1)
 	@make -C libft clean
 	@make -C libft/ft_printf clean
+	@echo "Cleaning up *.o files..."
 
 fclean: clean
 	@make -C $(dir $(LIBFT)) fclean
@@ -70,3 +71,5 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+	
+	#-Wall -Wextra -Werror 
