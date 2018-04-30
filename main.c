@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/04/29 16:43:13 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/04/29 16:59:41 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 
 int		main(void)
 {
-	ft_printf("%s\n", "yeahhh");
+	char	*str;
+
+	while (get_next_line(0, &str))
+	{
+		ft_printf("%s\n", str);
+		free(str);
+	}
 	return (0);
 }
