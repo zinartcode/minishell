@@ -6,7 +6,7 @@
 #    By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/29 16:27:03 by azinnatu          #+#    #+#              #
-#    Updated: 2018/04/30 13:24:47 by azinnatu         ###   ########.fr        #
+#    Updated: 2018/04/30 20:18:03 by azinnatu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,9 @@ NAME = minishell
 FLAGS = -g
 CC = gcc
 
-SRC =	main.c 
+SRC =	main.c \
+		ft_env.c \
+		ft_dir.c
 
 LIBFT = libft/libft.a
 FT_PRINTF = libft/ft_printf/libftprintf.a

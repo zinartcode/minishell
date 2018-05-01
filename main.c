@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/04/30 16:20:11 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/04/30 20:58:17 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,58 +17,42 @@ extern char	**environ;
 int		main(int ac, char **av, char **envp)
 {
 	char	**env;
-	char	**cmd;
 
 	env = environ;
-
 	(void)ac;
 	(void)av;
-	// while (*env != NULL)
-	// {
-	// 	ft_printf("%s\n", *env);
-	// 	*env++;
-	// }
+	process_args(env, envp);
+	return (0);
+}
+
+void	process_args(char **env, char **envp)
+{
+	char	**cmd;
 
 	while (1)
 	{
 		ft_putstr_fd(GRN"m_sh$> "NRM, 1);
-		cmd = readinput();
+		cmd = read_input();
 		// print_env(cmd);
 		if (cmd[0] && ft_strcmp(cmd[0], "exit") == 0)
+		{
+			ft_printf("%s\n", "exit");
 			exit(0);
+		}
+		else if (cmd[0] && ft_strcmp(cmd[0], "cd") == 0)
+			ft_cd(cmd, envp);
 		else if (cmd[0] && ft_strcmp(cmd[0], "env") == 0)
 			print_env(env);
 		else if (cmd[0] && ft_strcmp(cmd[0], "setenv") == 0)
 			ft_printf("%s\n", "run setenv"); // envp = ft_setenv(&envp, env);
 		else if (cmd[0] && ft_strcmp(cmd[0], "unsetenv") == 0)
 			ft_printf("%s\n", "run unsetenv"); //envp = ft_unsetenv(&envp, env);
-		else if (cmd[0] && ft_strcmp(cmd[0], "cd") == 0)
-			ft_printf("%s\n", "run cd"); //ft_cd(env, envp);
 		else
 			ft_printf("%s\n", "else"); //ft_getcommand(envp, env);
 	}
-
-	// while (get_next_line(0, &str))
-	// {
-		// ft_printf("%s\n", str);
-	// 	free(str);
-	// }
-	return (0);
 }
 
-void	print_env(char **env)
-{
-	int	i;
-
-	i = 0;
-	while (env[i])
-	{
-		ft_printf("%s\n", env[i]);
-		i++;
-	}
-}
-
-char	**readinput(void)
+char	**read_input(void)
 {
 	char	*command;
 	char	**args;
@@ -90,6 +74,7 @@ char	**readinput(void)
 		}
 		i++;
 	}
+	free(command);
 	return (args);
 }
 
