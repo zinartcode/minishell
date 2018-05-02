@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/04/30 20:58:17 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/01 17:03:27 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@ int		main(int ac, char **av, char **envp)
 {
 	char	**env;
 
-	env = environ;
+	// env = environ;
 	(void)ac;
 	(void)av;
+	create_env(&env, envp);
 	process_args(env, envp);
 	return (0);
 }
@@ -48,7 +49,7 @@ void	process_args(char **env, char **envp)
 		else if (cmd[0] && ft_strcmp(cmd[0], "unsetenv") == 0)
 			ft_printf("%s\n", "run unsetenv"); //envp = ft_unsetenv(&envp, env);
 		else
-			ft_printf("%s\n", "else"); //ft_getcommand(envp, env);
+			ft_cmd(cmd, env, envp);
 	}
 }
 
@@ -58,7 +59,7 @@ char	**read_input(void)
 	char	**args;
 	int		i;
 
-	args = 0;
+	args = NULL;
 	get_next_line(0, &command);
 	format_str(&command);
 	args = ft_strsplit(command, ' ');

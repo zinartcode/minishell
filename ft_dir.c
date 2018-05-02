@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 20:17:30 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/04/30 20:45:41 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/04/30 21:44:37 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*ft_cd_home(char **envp)
 	while (envp[i])
 	{
 		if (ft_strstr("HOME=", envp[i]) == 0)
-			return (envp[i]);
+			return (envp[i + 3] + 5);
 		i++;
 	}
 	return NULL;
