@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 19:46:30 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/01 17:01:35 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/01 21:33:39 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,4 @@ void	create_env(char ***env, char **envp)
 		(*env)[i][j] = 0;
 	}
 	(*env)[i] = NULL;
-	i = -1;
 }

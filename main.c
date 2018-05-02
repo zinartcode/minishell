@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/01 20:34:19 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/01 23:42:14 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	process_args(char **env, char **envp)
 			exit(0);
 		}
 		else if (cmd[0] && ft_strcmp(cmd[0], "cd") == 0)
-			ft_cd(cmd, envp);
+			ft_cd(cmd, env);
 		else if (cmd[0] && ft_strcmp(cmd[0], "env") == 0)
 			print_env(env);
 		else if (cmd[0] && ft_strcmp(cmd[0], "setenv") == 0)
@@ -77,7 +77,7 @@ char	**read_input(void)
 		}
 		i++;
 	}
-	free(command);
+	// free(command);
 	return (args);
 }
 

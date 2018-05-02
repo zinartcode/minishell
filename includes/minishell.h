@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 16:40:47 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/01 17:04:38 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/01 22:10:09 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@
 void		process_args(char **env, char **envp);
 char		**read_input(void);
 void		format_str(char **line);
-void		ft_cd(char **cmd, char **envp);
+void		ft_cd(char **cmd, char **env);
 char		*ft_cd_home(char **envp);
+char		**cd_env_change(char **cmd, char **env);
 void		ft_cmd(char **cmd, char **env, char **envp);
 char		*ft_findexec(char **paths, char *command);
 char		**ft_getpath(char **envp);

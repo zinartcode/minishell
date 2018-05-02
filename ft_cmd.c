@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 21:08:33 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/01 17:25:35 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/01 21:33:37 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_cmd(char **cmd, char **env, char **envp)
 			exit(0);
 		}
 	}
+	free(error);
 }
 
 char	*ft_findexec(char **paths, char *command)
