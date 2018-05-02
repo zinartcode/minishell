@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 20:17:30 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/01 23:53:13 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/02 00:00:04 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ char	**cd_env_change(char **cmd, char **env)
 	i = -1;
 	old = (char*)ft_memalloc(PATH_MAX + 1);
 	old = ft_strdup("OLD");
-	// len = ft_strlen(cmd[1])
 	temp = (char*)ft_memalloc(PATH_MAX + 1);
 	// change PWD
 	while (env[++i])
@@ -80,8 +79,9 @@ char	**cd_env_change(char **cmd, char **env)
 	ft_strclr(env[i]);
 	ft_strcat(old, temp);
 	env[i] = ft_strdup(old);
-	ft_printf("%s\n", env[i]);
+	ft_printf("%s\n", env[i]);  //test
 	free(old);
 	free(temp);
 	return (env);
+	//fix cd ..
 }
