@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/01 23:42:14 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/02 19:57:43 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ char	**read_input(void)
 		}
 		i++;
 	}
-	// free(command);
+	if (command)
+		free(command);
 	return (args);
 }
 
