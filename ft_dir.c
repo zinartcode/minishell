@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 20:17:30 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/02 21:16:33 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/02 22:45:33 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,7 @@ char	*ft_cd_home(char **env)
 				j++;
 			ft_strclr(env[j]);
 			env[j] = ft_strcpy(env[j], "PWD=");
-			// ft_printf("home is %s\n", env[j]);
 			ft_strcat(env[j], home);
-			// ft_printf("home is %s\n", env[j]);
 			free(home);
 			return (&env[i][5]);
 		}
@@ -71,14 +69,16 @@ char	*ft_cd_home(char **env)
 char	**cd_env_change(char *cmd, char **env)
 {
 	int		i;
-	// int		len;
+	int		j;
 	char	*temp;
 	char	*old;
+	char	*pth;
 
 	i = -1;
 	old = (char*)malloc(PATH_MAX + 1);
-	old = ft_strcpy(old, "OLD");
 	temp = (char*)malloc(PATH_MAX + 1);
+	pth = (char*)malloc(PATH_MAX + 1);
+	old = ft_strcpy(old, "OLD");
 	// change PWD
 	while (env[++i])
 	{
@@ -86,12 +86,25 @@ char	**cd_env_change(char *cmd, char **env)
 			break ;
 	}
 	temp = ft_strcpy(temp, env[i]);
-	if (ft_strcmp(cmd, "..") != 0)
+	if (ft_strncmp(cmd, "..", 2) != 0 && ft_strcmp(cmd, ".") != 0)
 	{
 		ft_strcat(env[i], "/");
 		ft_strcat(env[i], cmd);
-		// ft_printf("%s\n", env[i]); //test
 	}
+	else if (ft_strncmp(cmd, "..", 2) == 0)
+	{
+		j = ft_strlen(env[i]);
+		while (env[i][--j] != '/')
+			env[i][j] = 0;
+		env[i][j] = 0;
+		if (cmd[3] != 0 || cmd[3] != '\0')
+		{
+			pth = ft_strcpy(pth, &cmd[3]);
+			// ft_printf("%s\n", pth);
+			env = cd_env_change(pth, env);
+		}
+	}
+		
 
 	// change OLDPWD
 	i = -1;
@@ -103,9 +116,16 @@ char	**cd_env_change(char *cmd, char **env)
 	ft_strclr(env[i]);
 	ft_strcat(old, temp);
 	ft_strcpy(env[i], old);
-	// ft_printf("%s\n", env[i]);  //test
 	free(old);
 	free(temp);
+	free(pth);
 	return (env);
 	//fix cd ..
+}
+
+char	*cd_env_back(char *env)
+{
+	ft_printf("I received: $s\n", env);
+	return NULL;
+
 }
