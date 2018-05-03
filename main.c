@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/02 19:57:43 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/02 21:01:02 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int		main(int ac, char **av, char **envp)
 	(void)av;
 	create_env(&env, envp);
 	process_args(env, envp);
+	free_env(env);
 	return (0);
 }
 
@@ -52,6 +53,7 @@ void	process_args(char **env, char **envp)
 			ft_printf("%s\n", "run echo"); //envp = ft_echo(cmd, &envp, env);
 		else
 			ft_cmd(cmd, env, envp);
+		free_env(cmd);
 	}
 }
 

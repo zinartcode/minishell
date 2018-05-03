@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 20:17:30 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/02 20:42:28 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/02 21:16:33 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ char	*ft_cd_home(char **env)
 	{
 		if (!ft_strncmp(env[i], "HOME", 4))
 		{
+			ft_strclr(home);
 			home = ft_strcpy(home, &env[i][5]);
 			while (env[j] && ft_strncmp(env[j], "PWD", 3))
 				j++;
@@ -58,7 +59,8 @@ char	*ft_cd_home(char **env)
 			env[j] = ft_strcpy(env[j], "PWD=");
 			// ft_printf("home is %s\n", env[j]);
 			ft_strcat(env[j], home);
-			ft_printf("home is %s\n", env[j]);
+			// ft_printf("home is %s\n", env[j]);
+			free(home);
 			return (&env[i][5]);
 		}
 		i++;
@@ -75,7 +77,7 @@ char	**cd_env_change(char *cmd, char **env)
 
 	i = -1;
 	old = (char*)malloc(PATH_MAX + 1);
-	old = ft_strdup("OLD");
+	old = ft_strcpy(old, "OLD");
 	temp = (char*)malloc(PATH_MAX + 1);
 	// change PWD
 	while (env[++i])
@@ -83,12 +85,12 @@ char	**cd_env_change(char *cmd, char **env)
 		if (!ft_strncmp(env[i], "PWD", 3))
 			break ;
 	}
-	temp = ft_strdup(env[i]);
+	temp = ft_strcpy(temp, env[i]);
 	if (ft_strcmp(cmd, "..") != 0)
 	{
 		ft_strcat(env[i], "/");
 		ft_strcat(env[i], cmd);
-		ft_printf("%s\n", env[i]); //test
+		// ft_printf("%s\n", env[i]); //test
 	}
 
 	// change OLDPWD
@@ -100,10 +102,10 @@ char	**cd_env_change(char *cmd, char **env)
 	}
 	ft_strclr(env[i]);
 	ft_strcat(old, temp);
-	env[i] = ft_strdup(old);
-	ft_printf("%s\n", env[i]);  //test
-	// free(old);
-	// free(temp);
+	ft_strcpy(env[i], old);
+	// ft_printf("%s\n", env[i]);  //test
+	free(old);
+	free(temp);
 	return (env);
 	//fix cd ..
 }

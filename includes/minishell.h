@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 16:40:47 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/02 19:37:20 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/02 20:56:15 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ char		**ft_getpath(char **envp);
 
 void		create_env(char ***env, char **envp);
 void		print_env(char **env);
+void		free_env(char **env);
 
 #endif
