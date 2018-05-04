@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 19:46:30 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/02 20:59:06 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/04 01:11:33 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,9 @@ void	free_env(char **env)
 
 	i = 0;
 	while (env[i])
-		free(env[i++]);
+	{
+		free(env[i]);
+		i++;
+	}
 	free(env);
 }

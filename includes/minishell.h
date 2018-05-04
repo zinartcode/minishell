@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 16:40:47 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/02 21:58:18 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/04 00:08:34 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void		format_str(char **line);
 void		ft_cd(char **cmd, char **env);
 char		*ft_cd_home(char **env);
 char		**cd_env_change(char *cmd, char **env);
-char		*cd_env_back(char *env);
+char		**cd_env_back(char *cmd, char **env, int i);
 void		ft_cmd(char **cmd, char **env, char **envp);
 char		*ft_findexec(char **paths, char *command);
 char		**ft_getpath(char **envp);

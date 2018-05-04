@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/02 21:01:02 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/04 01:43:58 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,12 @@ char	**read_input(void)
 	{
 		if (args[i][0] == '\'' || args[i][0] == '"')
 		{
-			args[i]++;
 			if (args[i][ft_strlen(args[i]) - 1] == '\'' ||
 					args[i][ft_strlen(args[i]) - 1] == '"')
+			{
+				args[i] = ft_strcpy(args[i], &args[i][1]);
 				args[i][ft_strlen(args[i]) - 1] = 0;
+			}
 		}
 		i++;
 	}
@@ -93,8 +95,6 @@ void	format_str(char **line)
 	{
 		if ((*line)[i] == '\t')
 			(*line)[i] = ' ';
-		if ((*line)[i] == '\'' || (*line)[i] == '"')
-			;
 		i++;
 	}
 }
