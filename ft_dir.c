@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 20:17:30 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/02 22:45:33 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/03 23:53:10 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ char	**cd_env_change(char *cmd, char **env)
 	//fix cd ..
 }
 
-char	*cd_env_back(char *env)
+char	**cd_env_back(char *cmd, char **env)
 {
 	ft_printf("I received: $s\n", env);
 	return NULL;
