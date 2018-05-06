@@ -15,34 +15,78 @@
 void	ft_cd(char **cmd, char **env)
 {
 	struct stat	statbuf;
+	char	*temp;
 
 	if (cmd[1] == 0 || ft_strcmp(cmd[1], "~") == 0 || ft_strcmp(cmd[1], "~/") == 0)
 	{
 		env = cd_env_change("", env);
-		chdir(ft_cd_home(env));
+		chdir(ft_cd_home(cmd, env, 0));
 	}
-	else if (cmd[1][0] == '~' && cmd[1][2] != 0)
+	else if (ft_strncmp(cmd[1], "~/", 2) == 0 && cmd[1][2] != 0)
 	{
-		chdir(ft_cd_home(env));
-		env = cd_env_change(&cmd[1][2], env);
-		chdir(&cmd[1][2]);
+		temp = (char*)ft_memalloc(PATH_MAX + 1);
+		ft_strcpy(temp, ft_get_homedir(env));
+		ft_strcat(temp, &cmd[1][1]);
+		// ft_strclr(cmd[1]);
+		cmd[1] = ft_strcpy(cmd[1], temp);
+		free(temp);
+		// ft_printf("path is: %s\n", cmd[1]);
+		// if (check_dir(cmd, env) != 1)
+		// {
+		// 	env = cd_env_change(cmd[1], env);
+		// 	chdir(ft_cd_home(cmd, env, 1));
+		// 	chdir(cmd[1]);
+		// }
 	}
-	else if (cmd[1] && stat(cmd[1], &statbuf))
-		ft_putendl_fd(ft_strjoin("cd: No such file or directory: ", cmd[1]), 2);
-	else if (!(S_ISDIR(statbuf.st_mode)) && cmd[1])
-		ft_putendl_fd(ft_strjoin("cd: Not a directory: ", cmd[1]), 2);
-	else if (access(cmd[1], X_OK) == -1 && cmd[1])
-		ft_putendl_fd(ft_strjoin("cd: Permission Denied: ", cmd[1]), 2);
-	else if (cmd[2] != 0)
-		ft_putendl_fd("cd: Too many arguments.", 2);
-	else
+	if (check_dir(cmd, env) != 1)
 	{
 		env = cd_env_change(cmd[1], env);
 		chdir(cmd[1]);
 	}
 }
 
-char	*ft_cd_home(char **env)
+int		check_dir(char **cmd, char **env)
+{
+	struct stat	statbuf;
+
+	if (cmd[1] && stat(cmd[1], &statbuf))
+	{
+		ft_putendl_fd(ft_strjoin("cd: No such file or directory: ", cmd[1]), 2);
+		return (1);
+	}
+	else if (!(S_ISDIR(statbuf.st_mode)) && cmd[1])
+	{
+		ft_putendl_fd(ft_strjoin("cd: Not a directory: ", cmd[1]), 2);
+		return (1);
+	}
+	else if (access(cmd[1], X_OK) == -1 && cmd[1])
+	{
+		ft_putendl_fd(ft_strjoin("cd: Permission Denied: ", cmd[1]), 2);
+		return (1);
+	}
+	else if (cmd[2] != 0)
+	{
+		ft_putendl_fd("cd: Too many arguments.", 2);
+		return (1);
+	}
+	return (0);	
+}
+
+char	*ft_get_homedir(char **env)
+{
+	int		i;
+
+	i = 0;
+	while (env[i])
+	{
+		if (!ft_strncmp(env[i], "HOME", 4))
+			return (&env[i][5]);
+		i++;
+	}
+	return (0);
+}
+
+char	*ft_cd_home(char **cmd, char **env, int flag)
 {
 	int		i;
 	int		j;
@@ -55,13 +99,14 @@ char	*ft_cd_home(char **env)
 	{
 		if (!ft_strncmp(env[i], "HOME", 4))
 		{
-			ft_strclr(home);
 			home = ft_strcpy(home, &env[i][5]);
 			while (env[j] && ft_strncmp(env[j], "PWD", 3))
 				j++;
 			ft_strclr(env[j]);
 			env[j] = ft_strcpy(env[j], "PWD=");
 			ft_strcat(env[j], home);
+			if (flag == 1)
+				ft_strcat(env[j], &cmd[1][1]);
 			free(home);
 			return (&env[i][5]);
 		}

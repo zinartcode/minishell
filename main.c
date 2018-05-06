@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/04 01:48:14 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/04 02:41:48 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	process_args(char **env, char **envp)
 		else if (cmd[0] && ft_strcmp(cmd[0], "env") == 0)
 			print_env(env);
 		else if (cmd[0] && ft_strcmp(cmd[0], "setenv") == 0)
-			ft_printf("%s\n", "run setenv"); // envp = ft_setenv(cmd, &envp, env);
+			env = ft_setenv(cmd, env);
 		else if (cmd[0] && ft_strcmp(cmd[0], "unsetenv") == 0)
 			ft_printf("%s\n", "run unsetenv"); //envp = ft_unsetenv(cmd, &envp, env);
 		else if (cmd[0] && ft_strcmp(cmd[0], "echo") == 0)
