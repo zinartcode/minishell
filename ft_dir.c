@@ -17,6 +17,7 @@ void	ft_cd(char **cmd, char **env)
 	struct stat	statbuf;
 	char	*temp;
 
+	temp = NULL;
 	if (cmd[1] == 0 || ft_strcmp(cmd[1], "~") == 0 || ft_strcmp(cmd[1], "~/") == 0)
 	{
 		env = cd_env_change("", env);
@@ -24,12 +25,15 @@ void	ft_cd(char **cmd, char **env)
 	}
 	else if (ft_strncmp(cmd[1], "~/", 2) == 0 && cmd[1][2] != 0)
 	{
+		if (check_dir(cmd, env) != 1)
+		{
 		temp = (char*)ft_memalloc(PATH_MAX + 1);
 		ft_strcpy(temp, ft_get_homedir(env));
 		ft_strcat(temp, &cmd[1][1]);
 		// ft_strclr(cmd[1]);
 		cmd[1] = ft_strcpy(cmd[1], temp);
 		free(temp);
+		}
 		// ft_printf("path is: %s\n", cmd[1]);
 		// if (check_dir(cmd, env) != 1)
 		// {
@@ -38,7 +42,7 @@ void	ft_cd(char **cmd, char **env)
 		// 	chdir(cmd[1]);
 		// }
 	}
-	if (check_dir(cmd, env) != 1)
+	else if (check_dir(cmd, env) != 1)
 	{
 		env = cd_env_change(cmd[1], env);
 		chdir(cmd[1]);
@@ -49,24 +53,28 @@ int		check_dir(char **cmd, char **env)
 {
 	struct stat	statbuf;
 
-	if (cmd[1] && stat(cmd[1], &statbuf))
+	if (cmd[2] != 0)
 	{
-		ft_putendl_fd(ft_strjoin("cd: No such file or directory: ", cmd[1]), 2);
+		ft_printf("cd: Too many arguments.\n");
+		// ft_putendl_fd("cd: Too many arguments.", 2);
+		return (1);
+	}
+	else if (access(cmd[1], X_OK) == -1 && (S_ISDIR(statbuf.st_mode) && cmd[1]))
+	{
+		ft_printf("%s: Permission Denied\n", cmd[1]);
+		// ft_putendl_fd(ft_strjoin("cd: Permission Denied: ", cmd[1]), 2);
+		return (1);
+	}
+	else if (cmd[1] && stat(cmd[1], &statbuf))
+	{
+		ft_printf("%s: no such file or directory\n", cmd[1]);
+		// ft_putendl_fd(ft_strjoin("cd: No such file or directory: ", cmd[1]), 2);
 		return (1);
 	}
 	else if (!(S_ISDIR(statbuf.st_mode)) && cmd[1])
 	{
-		ft_putendl_fd(ft_strjoin("cd: Not a directory: ", cmd[1]), 2);
-		return (1);
-	}
-	else if (access(cmd[1], X_OK) == -1 && cmd[1])
-	{
-		ft_putendl_fd(ft_strjoin("cd: Permission Denied: ", cmd[1]), 2);
-		return (1);
-	}
-	else if (cmd[2] != 0)
-	{
-		ft_putendl_fd("cd: Too many arguments.", 2);
+		ft_printf("%s: Not a directory\n", cmd[1]);
+		// ft_putendl_fd(ft_strjoin("cd: Not a directory: ", cmd[1]), 2);
 		return (1);
 	}
 	return (0);	
