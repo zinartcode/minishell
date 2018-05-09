@@ -42,7 +42,7 @@ void	process_args(char **env, char **envp)
 		else if (cmd[0] && ft_strcmp(cmd[0], "cd") == 0)
 			ft_cd(cmd, env);
 		else if (cmd[0] && ft_strcmp(cmd[0], "env") == 0)
-			print_env(env);
+			ft_env(cmd, env);
 		else if (cmd[0] && ft_strcmp(cmd[0], "setenv") == 0)
 			env = ft_setenv(cmd, env);
 		else if (cmd[0] && ft_strcmp(cmd[0], "unsetenv") == 0)

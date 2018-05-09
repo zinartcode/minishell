@@ -23,7 +23,7 @@ void		ft_cd(char **cmd, char **env)
 		chdir(ft_cd_home(cmd, env, 0));
 	}
 	else if (cmd[1] && ft_strcmp(cmd[1], "-") == 0)
-		cd_env_old(env);
+		cd_env_old(env, -1);
 	else if (ft_strncmp(cmd[1], "~/", 2) == 0 && cmd[1][2] != 0)
 	{
 		if (check_dir(cmd, env) != 1)
@@ -35,13 +35,6 @@ void		ft_cd(char **cmd, char **env)
 		cmd[1] = ft_strcpy(cmd[1], temp);
 		free(temp);
 		}
-		// ft_printf("path is: %s\n", cmd[1]);
-		// if (check_dir(cmd, env) != 1)
-		// {
-		// 	env = cd_env_change(cmd[1], env);
-		// 	chdir(ft_cd_home(cmd, env, 1));
-		// 	chdir(cmd[1]);
-		// }
 	}
 	else if (check_dir(cmd, env) != 1)
 	{
@@ -50,39 +43,26 @@ void		ft_cd(char **cmd, char **env)
 	}
 }
 
-char		**cd_env_old(char **env)
+char		**cd_env_old(char **env, int i)
 {
-	int		i;
 	char	*old;
 	char	*curr;
 
-	i = -1;
 	old = (char*)ft_memalloc(PATH_MAX + 1);
 	curr = (char*)ft_memalloc(PATH_MAX + 1);
 	ft_strcpy(old, ft_get_path(env, "OLDPWD="));
 	ft_strcpy(curr, ft_get_path(env, "PWD="));
-	// ft_printf(" old path is: %s\n", old);
-	// ft_printf(" curr path is: %s\n", curr);
 	while (env[++i])
 	{
 		if (!ft_strncmp(env[i], "OLDPWD=",7))
 		{
-			// ft_strcpy(old, &env[i][3]);
-			ft_strclr(env[i]);
-			env[i] = ft_strcat("OLDPWD=", curr);
-			// ft_strcpy(env[i], old);
-			// ft_strcat(env[i], "OLDPWD=");
-			// ft_strcat(env[i], old);
+			ft_strclr(&env[i][7]);
+			ft_strcat(env[i], curr);
 		}
 		if (!ft_strncmp(env[i], "PWD=",4))
 		{
-			ft_strclr(env[i]);
-			env[i] = ft_strcat("PWD=", old);
-			// curr = ft_strdup(env[i]);
-			// ft_strcat("OLD", env[i]);
-			// ft_strclr(env[i]);
-			// ft_strcpy(env[i], "PWD=");
-			// ft_strcat(env[i], curr);
+			ft_strclr(&env[i][4]);
+			ft_strcat(env[i], old);
 		}
 	}
 	chdir(old);

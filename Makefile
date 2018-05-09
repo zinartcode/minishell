@@ -6,7 +6,7 @@
 #    By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/29 16:27:03 by azinnatu          #+#    #+#              #
-#    Updated: 2018/04/30 21:14:21 by azinnatu         ###   ########.fr        #
+#    Updated: 2018/05/09 02:26:35 by azinnatu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ CC = gcc
 
 SRC =	main.c \
 		ft_env.c \
+		ft_setenv.c \
 		ft_dir.c \
 		ft_cmd.c 
 
