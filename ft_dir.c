@@ -12,9 +12,8 @@
 
 #include "minishell.h"
 
-void	ft_cd(char **cmd, char **env)
+void		ft_cd(char **cmd, char **env)
 {
-	struct stat	statbuf;
 	char	*temp;
 
 	temp = NULL;
@@ -23,14 +22,16 @@ void	ft_cd(char **cmd, char **env)
 		env = cd_env_change("", env);
 		chdir(ft_cd_home(cmd, env, 0));
 	}
+	else if (cmd[1] && ft_strcmp(cmd[1], "-") == 0)
+		cd_env_old(env);
 	else if (ft_strncmp(cmd[1], "~/", 2) == 0 && cmd[1][2] != 0)
 	{
 		if (check_dir(cmd, env) != 1)
 		{
 		temp = (char*)ft_memalloc(PATH_MAX + 1);
-		ft_strcpy(temp, ft_get_homedir(env));
+		ft_strcpy(temp, ft_get_path(env, "HOME"));
 		ft_strcat(temp, &cmd[1][1]);
-		// ft_strclr(cmd[1]);
+		ft_strclr(cmd[1]);
 		cmd[1] = ft_strcpy(cmd[1], temp);
 		free(temp);
 		}
@@ -49,6 +50,47 @@ void	ft_cd(char **cmd, char **env)
 	}
 }
 
+char		**cd_env_old(char **env)
+{
+	int		i;
+	char	*old;
+	char	*curr;
+
+	i = -1;
+	old = (char*)ft_memalloc(PATH_MAX + 1);
+	curr = (char*)ft_memalloc(PATH_MAX + 1);
+	ft_strcpy(old, ft_get_path(env, "OLDPWD="));
+	ft_strcpy(curr, ft_get_path(env, "PWD="));
+	// ft_printf(" old path is: %s\n", old);
+	// ft_printf(" curr path is: %s\n", curr);
+	while (env[++i])
+	{
+		if (!ft_strncmp(env[i], "OLDPWD=",7))
+		{
+			// ft_strcpy(old, &env[i][3]);
+			ft_strclr(env[i]);
+			env[i] = ft_strcat("OLDPWD=", curr);
+			// ft_strcpy(env[i], old);
+			// ft_strcat(env[i], "OLDPWD=");
+			// ft_strcat(env[i], old);
+		}
+		if (!ft_strncmp(env[i], "PWD=",4))
+		{
+			ft_strclr(env[i]);
+			env[i] = ft_strcat("PWD=", old);
+			// curr = ft_strdup(env[i]);
+			// ft_strcat("OLD", env[i]);
+			// ft_strclr(env[i]);
+			// ft_strcpy(env[i], "PWD=");
+			// ft_strcat(env[i], curr);
+		}
+	}
+	chdir(old);
+	free(old);
+	free(curr);
+	return (env);
+}
+
 int		check_dir(char **cmd, char **env)
 {
 	struct stat	statbuf;
@@ -56,39 +98,40 @@ int		check_dir(char **cmd, char **env)
 	if (cmd[2] != 0)
 	{
 		ft_printf("cd: Too many arguments.\n");
-		// ft_putendl_fd("cd: Too many arguments.", 2);
 		return (1);
 	}
-	else if (access(cmd[1], X_OK) == -1 && (S_ISDIR(statbuf.st_mode) && cmd[1]))
+	else if (access(cmd[1], X_OK) == -1 && cmd[1]) //(S_ISDIR(statbuf.st_mode) && cmd[1]))
 	{
-		ft_printf("%s: Permission Denied\n", cmd[1]);
-		// ft_putendl_fd(ft_strjoin("cd: Permission Denied: ", cmd[1]), 2);
+		if (!(S_ISDIR(statbuf.st_mode)) && cmd[1])
+			ft_printf("%s: Not a directory\n", cmd[1]);
+		else
+			ft_printf("%s: Permission Denied\n", cmd[1]);
 		return (1);
 	}
 	else if (cmd[1] && stat(cmd[1], &statbuf))
 	{
 		ft_printf("%s: no such file or directory\n", cmd[1]);
-		// ft_putendl_fd(ft_strjoin("cd: No such file or directory: ", cmd[1]), 2);
 		return (1);
 	}
 	else if (!(S_ISDIR(statbuf.st_mode)) && cmd[1])
 	{
 		ft_printf("%s: Not a directory\n", cmd[1]);
-		// ft_putendl_fd(ft_strjoin("cd: Not a directory: ", cmd[1]), 2);
 		return (1);
 	}
 	return (0);	
 }
 
-char	*ft_get_homedir(char **env)
+char	*ft_get_path(char **env, char *name)
 {
 	int		i;
+	int		j;
 
 	i = 0;
+	j = ft_strlen(name);
 	while (env[i])
 	{
-		if (!ft_strncmp(env[i], "HOME", 4))
-			return (&env[i][5]);
+		if (!ft_strncmp(env[i], name, j))
+			return (&env[i][j++]);
 		i++;
 	}
 	return (0);
