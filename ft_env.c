@@ -34,7 +34,7 @@ void	ft_env(char **cmd, char **env)
 			if (!ft_strncmp(cmd[1], env[i], len))
 			{
 				flag = 1;
-				ft_printf("%s\n", &env[i][len + 1]);
+				ft_printf("%s\n", &env[i][len]);
 			}
 		}
 		if (flag == 0)

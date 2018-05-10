@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 16:40:47 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/09 00:58:01 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/09 18:30:30 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ char		*ft_findexec(char **paths, char *command);
 
 void		create_env(char ***env, char **envp);
 char		**ft_setenv(char **cmd, char **env);
+char		**ft_unsetenv(char **cmd, char **env);
+char		**set_name(char **cmd, char **env);
+char		**set_full(char **cmd, char **env);
+char		**modify_env(char **cmd, char **env, int i);
 void		print_env(char **env);
 void		free_env(char **env);
 
