@@ -6,7 +6,7 @@
 #    By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/29 16:27:03 by azinnatu          #+#    #+#              #
-#    Updated: 2018/05/09 18:29:49 by azinnatu         ###   ########.fr        #
+#    Updated: 2018/05/09 19:47:37 by azinnatu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC =	main.c \
 		ft_setenv.c \
 		ft_unsetenv.c \
 		ft_dir.c \
+		ft_echo.c \
 		ft_cmd.c 
 
 LIBFT = libft/libft.a

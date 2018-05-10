@@ -6,36 +6,88 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 21:08:33 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/01 21:33:37 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/09 22:56:25 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_cmd(char **cmd, char **env, char **envp)
+// void	ft_cmd(char **cmd, char **env)
+// {
+// 	char	*folder;
+// 	pid_t	parent;
+// 	char	*error;
+// 	cahr	*temp;
+
+// 	error = ft_strdup("ft_minishell1: command not found: ");
+// 	temp = (char*)ft_memalloc(PATH_MAX + 1);
+// 	ft_strcpy(temp, cmd[0])
+// 	if (cmd[0])
+// 	{
+// 		if (cmd[0][0] == '$')
+// 			cmd[0] = find_exec_env(cmd, env);
+// 		parent = fork();
+// 		if (parent > 0)
+// 			wait(0);
+// 		else
+// 		{
+// 			if ((folder = ft_findexec(ft_getpath(env), cmd[0])))
+// 				execve(ft_strjoin(folder, cmd[0]), cmd, env);
+// 			else if (access(cmd[0], R_OK) == 0)
+// 				execve(cmd[0], cmd, env);
+// 			else
+// 				ft_putendl_fd(ft_strjoin(error, cmd[0]), 2);
+// 			exit(0);
+// 		}
+// 	}
+// 	free(error);
+// }
+
+void	ft_cmd(char **cmd, char **env)
 {
 	char	*folder;
 	pid_t	parent;
 	char	*error;
+	char	*temp;
 
 	error = ft_strdup("ft_minishell1: command not found: ");
-	if (cmd[0])
+	temp = (char*)ft_memalloc(PATH_MAX + 1);
+	temp = ft_strcpy(temp, cmd[0]);
+	if (temp)
 	{
+		if (temp[0] == '$')
+			ft_strcpy(temp, find_exec_env(cmd, env));
 		parent = fork();
 		if (parent > 0)
 			wait(0);
 		else
 		{
-			if ((folder = ft_findexec(ft_getpath(envp), cmd[0])))
-				execve(ft_strjoin(folder, cmd[0]), cmd, envp);
-			else if (access(cmd[0], R_OK) == 0)
-				execve(cmd[0], cmd, envp);
+			if ((folder = ft_findexec(ft_getpath(env), temp)))
+				execve(ft_strjoin(folder, temp), cmd, env);
+			else if (access(temp, R_OK) == 0)
+				execve(temp, cmd, env);
 			else
-				ft_putendl_fd(ft_strjoin(error, cmd[0]), 2);
+				ft_putendl_fd(ft_strjoin(error, temp), 2);
 			exit(0);
 		}
 	}
 	free(error);
+}
+
+char	*find_exec_env(char **cmd, char **env)
+{
+	int		i;
+	char	*temp;
+
+	i = -1;
+	// temp = (char*)ft_memalloc(PATH_MAX + 1);
+	ft_strcat(cmd[0], "=");
+	while(env[++i])
+	{
+		if (!ft_strncmp(cmd[0], env[i], ft_strlen(cmd[0])))
+			ft_strcpy(temp, ft_get_path(env, cmd[0]));
+	}
+	return (temp);
 }
 
 char	*ft_findexec(char **paths, char *command)
