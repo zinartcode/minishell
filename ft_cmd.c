@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 21:08:33 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/09 22:56:25 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/10 14:57:05 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,18 @@ void	ft_cmd(char **cmd, char **env)
 
 	error = ft_strdup("ft_minishell1: command not found: ");
 	temp = (char*)ft_memalloc(PATH_MAX + 1);
-	temp = ft_strcpy(temp, cmd[0]);
-	if (temp)
+	if (cmd[0])
 	{
-		if (temp[0] == '$')
+		if (cmd[0][0] == '$')
+		{
+			ft_strcpy(temp, &cmd[0][1]);
+			ft_strclr(cmd[0]);
+			ft_strcpy(cmd[0], temp);
+			ft_strclr(temp);
 			ft_strcpy(temp, find_exec_env(cmd, env));
+		}
+		else
+			ft_strcpy(temp, cmd[0]);
 		parent = fork();
 		if (parent > 0)
 			wait(0);
@@ -72,6 +79,7 @@ void	ft_cmd(char **cmd, char **env)
 		}
 	}
 	free(error);
+	free(temp);
 }
 
 char	*find_exec_env(char **cmd, char **env)
@@ -80,7 +88,7 @@ char	*find_exec_env(char **cmd, char **env)
 	char	*temp;
 
 	i = -1;
-	// temp = (char*)ft_memalloc(PATH_MAX + 1);
+	temp = (char*)ft_memalloc(PATH_MAX + 1);
 	ft_strcat(cmd[0], "=");
 	while(env[++i])
 	{
