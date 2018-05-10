@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 21:08:33 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/10 14:57:05 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/10 15:05:33 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,22 +59,22 @@ void	ft_cmd(char **cmd, char **env)
 			ft_strcpy(temp, &cmd[0][1]);
 			ft_strclr(cmd[0]);
 			ft_strcpy(cmd[0], temp);
-			ft_strclr(temp);
-			ft_strcpy(temp, find_exec_env(cmd, env));
+			free(temp);
+			ft_strcpy(cmd[0], find_exec_env(cmd, env));
 		}
-		else
-			ft_strcpy(temp, cmd[0]);
+		// else
+		// 	ft_strcpy(temp, cmd[0]);
 		parent = fork();
 		if (parent > 0)
 			wait(0);
 		else
 		{
-			if ((folder = ft_findexec(ft_getpath(env), temp)))
-				execve(ft_strjoin(folder, temp), cmd, env);
-			else if (access(temp, R_OK) == 0)
-				execve(temp, cmd, env);
+			if ((folder = ft_findexec(ft_getpath(env), cmd[0])))
+				execve(ft_strjoin(folder, cmd[0]), cmd, env);
+			else if (access(cmd[0], R_OK) == 0)
+				execve(cmd[0], cmd, env);
 			else
-				ft_putendl_fd(ft_strjoin(error, temp), 2);
+				ft_putendl_fd(ft_strjoin(error, cmd[0]), 2);
 			exit(0);
 		}
 	}
