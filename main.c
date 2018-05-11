@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/09 22:05:44 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/10 18:16:36 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,8 @@
 
 extern char	**environ;
 
-int		main(int ac, char **av, char **envp)
+void	process_args(char **cmd, char **env)
 {
-	char	**env;
-
-	(void)ac;
-	(void)av;
-	create_env(&env, envp);
-	process_args(env);
-	free_env(env);
-	return (0);
-}
-
-void	process_args(char **env)
-{
-	char	**cmd;
-
 	while (1)
 	{
 		ft_putstr_fd(GRN"m_sh$> "NRM, 1);
@@ -42,7 +28,7 @@ void	process_args(char **env)
 		else if (cmd[0] && ft_strcmp(cmd[0], "cd") == 0)
 			ft_cd(cmd, env);
 		else if (cmd[0] && ft_strcmp(cmd[0], "env") == 0)
-			ft_env(cmd, env);
+			ft_env(cmd, env, 0, -1);
 		else if (cmd[0] && ft_strcmp(cmd[0], "setenv") == 0)
 			env = ft_setenv(cmd, env);
 		else if (cmd[0] && ft_strcmp(cmd[0], "unsetenv") == 0)
@@ -95,4 +81,18 @@ void	format_str(char **line)
 			(*line)[i] = ' ';
 		i++;
 	}
+}
+
+int		main(int ac, char **av, char **envp)
+{
+	char	**cmd;
+	char	**env;
+
+	cmd = NULL;
+	(void)ac;
+	(void)av;
+	create_env(&env, envp);
+	process_args(cmd, env);
+	free_env(env);
+	return (0);
 }

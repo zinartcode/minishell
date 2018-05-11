@@ -6,13 +6,13 @@
 #    By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/04/29 16:27:03 by azinnatu          #+#    #+#              #
-#    Updated: 2018/05/09 19:47:37 by azinnatu         ###   ########.fr        #
+#    Updated: 2018/05/10 18:04:07 by azinnatu         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-FLAGS = -g
+FLAGS = -Wall -Wextra -Werror -g
 CC = gcc
 
 SRC =	main.c \
@@ -20,6 +20,7 @@ SRC =	main.c \
 		ft_setenv.c \
 		ft_unsetenv.c \
 		ft_dir.c \
+		cd_env_change.c \
 		ft_echo.c \
 		ft_cmd.c 
 
@@ -77,5 +78,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
-	
-	#-Wall -Wextra -Werror 

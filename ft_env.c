@@ -12,22 +12,18 @@
 
 #include "minishell.h"
 
-void	ft_env(char **cmd, char **env)
+void	ft_env(char **cmd, char **env, int len, int i)
 {
-	int	i;
-	int	len;
 	int	flag;
 
-	i = -1;
 	flag = 0;
-	len = 0;
 	while (cmd[len])
 		len++;
 	if (len >= 3)
 		ft_printf("Too many arguments\n");
 	else if (len == 2)
 	{
-		cmd[1] = ft_strjoin(cmd[1], "=");
+		ft_strcat(cmd[1], "=");
 		len = ft_strlen(cmd[1]);
 		while (env[++i])
 		{

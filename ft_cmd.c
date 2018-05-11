@@ -6,42 +6,11 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 21:08:33 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/10 15:05:33 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/10 15:11:36 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// void	ft_cmd(char **cmd, char **env)
-// {
-// 	char	*folder;
-// 	pid_t	parent;
-// 	char	*error;
-// 	cahr	*temp;
-
-// 	error = ft_strdup("ft_minishell1: command not found: ");
-// 	temp = (char*)ft_memalloc(PATH_MAX + 1);
-// 	ft_strcpy(temp, cmd[0])
-// 	if (cmd[0])
-// 	{
-// 		if (cmd[0][0] == '$')
-// 			cmd[0] = find_exec_env(cmd, env);
-// 		parent = fork();
-// 		if (parent > 0)
-// 			wait(0);
-// 		else
-// 		{
-// 			if ((folder = ft_findexec(ft_getpath(env), cmd[0])))
-// 				execve(ft_strjoin(folder, cmd[0]), cmd, env);
-// 			else if (access(cmd[0], R_OK) == 0)
-// 				execve(cmd[0], cmd, env);
-// 			else
-// 				ft_putendl_fd(ft_strjoin(error, cmd[0]), 2);
-// 			exit(0);
-// 		}
-// 	}
-// 	free(error);
-// }
 
 void	ft_cmd(char **cmd, char **env)
 {
@@ -62,8 +31,6 @@ void	ft_cmd(char **cmd, char **env)
 			free(temp);
 			ft_strcpy(cmd[0], find_exec_env(cmd, env));
 		}
-		// else
-		// 	ft_strcpy(temp, cmd[0]);
 		parent = fork();
 		if (parent > 0)
 			wait(0);

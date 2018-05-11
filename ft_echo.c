@@ -28,13 +28,14 @@ void		ft_echo(char **cmd, char **env)
 		if (cmd[1][0] == '$')
 			echo_env(cmd[1], env);
 		else
-			ft_printf("%s\n", cmd[1]);
+			ft_printf("%s", cmd[1]);
 	}
 	else
-		process_echo(cmd, env, i, new_line);
+		process_echo(cmd, env, new_line);
+	ft_printf("\n");
 }
 
-void	process_echo(char **cmd, char **env, int i, int new_line)
+void	process_echo(char **cmd, char **env, int new_line)
 {
 	int	n;
 
@@ -49,7 +50,6 @@ void	process_echo(char **cmd, char **env, int i, int new_line)
 			ft_printf("%s ", cmd[n]);
 		n++;
 	}
-	ft_printf("\n");
 }
 
 void	echo_env(char *cmd, char **env)
