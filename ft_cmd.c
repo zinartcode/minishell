@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 21:08:33 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/10 20:04:01 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/10 20:26:52 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,18 +82,18 @@ char	*ft_findexec(char **paths, char *command)
 	return (NULL);
 }
 
-char	**ft_getpath(char **envp)
+char	**ft_getpath(char **env)
 {
 	char	**folders;
 	int		i;
 
-	while (*envp)
+	while (*env)
 	{
-		if (ft_strstr(*envp, "PATH="))
+		if (ft_strstr(*env, "PATH="))
 			break ;
-		envp++;
+		env++;
 	}
-	folders = ft_strsplit(ft_strstr(*envp, "PATH=") + 5, ':');
+	folders = ft_strsplit(ft_strstr(*env, "PATH=") + 5, ':');
 	i = 0;
 	while (folders[i])
 	{
