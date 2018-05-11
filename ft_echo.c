@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 19:46:44 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/09 21:58:11 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/10 20:06:06 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void		ft_echo(char **cmd, char **env)
 {
-	int	i;
-	int	new_line;
+	int		i;
+	int		new_line;
 
 	i = 0;
 	new_line = 0;
@@ -35,9 +35,9 @@ void		ft_echo(char **cmd, char **env)
 	ft_printf("\n");
 }
 
-void	process_echo(char **cmd, char **env, int new_line)
+void		process_echo(char **cmd, char **env, int new_line)
 {
-	int	n;
+	int		n;
 
 	n = 1;
 	if (new_line == 1)
@@ -52,9 +52,9 @@ void	process_echo(char **cmd, char **env, int new_line)
 	}
 }
 
-void	echo_env(char *cmd, char **env)
+void		echo_env(char *cmd, char **env)
 {
-	int	i;
+	int		i;
 	char	*temp;
 
 	i = -1;

@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 16:40:47 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/10 18:53:29 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/10 20:04:04 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char		**cd_env_change_2(char *temp, char **env);
 char		**cd_env_back(char *cmd, char **env, int i);
 char		**cd_env_old(char **env, int i);
 void		ft_cmd(char **cmd, char **env);
+void		ft_execute(char **cmd, char **env);
 char		*ft_findexec(char **paths, char *command);
 char		*find_exec_env(char **cmd, char **env);
 

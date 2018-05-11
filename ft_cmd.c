@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 21:08:33 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/10 19:41:03 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/10 20:04:01 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	ft_cmd(char **cmd, char **env)
 {
-	char	*folder;
-	pid_t	parent;
 	char	*temp;
 
 	temp = (char*)ft_memalloc(PATH_MAX + 1);
@@ -29,21 +27,29 @@ void	ft_cmd(char **cmd, char **env)
 			free(temp);
 			ft_strcpy(cmd[0], find_exec_env(cmd, env));
 		}
-		parent = fork();
-		if (parent > 0)
-			wait(0);
-		else
-		{
-			if ((folder = ft_findexec(ft_getpath(env), cmd[0])))
-				execve(ft_strjoin(folder, cmd[0]), cmd, env);
-			else if (access(cmd[0], R_OK) == 0)
-				execve(cmd[0], cmd, env);
-			else
-				ft_printf("ft_minishell1: command not found: ");
-			exit(0);
-		}
+		ft_execute(cmd, env);
 	}
 	free(temp);
+}
+
+void	ft_execute(char **cmd, char **env)
+{
+	pid_t	parent;
+	char	*folder;
+
+	parent = fork();
+	if (parent > 0)
+		wait(0);
+	else
+	{
+		if ((folder = ft_findexec(ft_getpath(env), cmd[0])))
+			execve(ft_strjoin(folder, cmd[0]), cmd, env);
+		else if (access(cmd[0], R_OK) == 0)
+			execve(cmd[0], cmd, env);
+		else
+			ft_printf("ft_minishell1: command not found: ");
+		exit(0);
+	}
 }
 
 char	*find_exec_env(char **cmd, char **env)
@@ -54,7 +60,7 @@ char	*find_exec_env(char **cmd, char **env)
 	i = -1;
 	temp = (char*)ft_memalloc(PATH_MAX + 1);
 	ft_strcat(cmd[0], "=");
-	while(env[++i])
+	while (env[++i])
 	{
 		if (!ft_strncmp(cmd[0], env[i], ft_strlen(cmd[0])))
 			ft_strcpy(temp, ft_get_path(env, cmd[0]));
@@ -73,7 +79,7 @@ char	*ft_findexec(char **paths, char *command)
 			paths++;
 		}
 	}
-	return NULL;
+	return (NULL);
 }
 
 char	**ft_getpath(char **envp)

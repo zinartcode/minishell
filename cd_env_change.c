@@ -6,13 +6,13 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 18:03:09 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/10 19:29:00 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/10 19:57:36 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**cd_env_change(char *cmd, char **env, int i)
+char		**cd_env_change(char *cmd, char **env, int i)
 {
 	char	*temp;
 
@@ -21,7 +21,7 @@ char	**cd_env_change(char *cmd, char **env, int i)
 		if (!ft_strncmp(env[i], "PWD=", 4))
 			break ;
 	temp = ft_strcpy(temp, env[i]);
-	if  (cmd[0] == '/')
+	if (cmd[0] == '/')
 	{
 		ft_strclr(env[i]);
 		env[i] = ft_strcpy(env[i], "PWD=");
@@ -39,7 +39,7 @@ char	**cd_env_change(char *cmd, char **env, int i)
 	return (env);
 }
 
-char	**cd_env_change_2(char *temp, char **env)
+char		**cd_env_change_2(char *temp, char **env)
 {
 	int		i;
 	char	*old;
@@ -49,7 +49,7 @@ char	**cd_env_change_2(char *temp, char **env)
 	i = -1;
 	while (env[++i])
 	{
-		if (!ft_strncmp(env[i], "OLDPWD=",7))
+		if (!ft_strncmp(env[i], "OLDPWD=", 7))
 			break ;
 	}
 	ft_strclr(env[i]);
@@ -70,12 +70,12 @@ char		**cd_env_old(char **env, int i)
 	ft_strcpy(curr, ft_get_path(env, "PWD="));
 	while (env[++i])
 	{
-		if (!ft_strncmp(env[i], "OLDPWD=",7))
+		if (!ft_strncmp(env[i], "OLDPWD=", 7))
 		{
 			ft_strclr(&env[i][7]);
 			ft_strcat(env[i], curr);
 		}
-		if (!ft_strncmp(env[i], "PWD=",4))
+		if (!ft_strncmp(env[i], "PWD=", 4))
 		{
 			ft_strclr(&env[i][4]);
 			ft_strcat(env[i], old);
@@ -87,7 +87,7 @@ char		**cd_env_old(char **env, int i)
 	return (env);
 }
 
-char	*ft_cd_home(char **cmd, char **env, int flag)
+char		*ft_cd_home(char **cmd, char **env, int flag)
 {
 	int		i;
 	int		j;
@@ -113,10 +113,10 @@ char	*ft_cd_home(char **cmd, char **env, int flag)
 		}
 		i++;
 	}
-	return NULL;
+	return (NULL);
 }
 
-char	**cd_env_back(char *cmd, char **env, int i)
+char		**cd_env_back(char *cmd, char **env, int i)
 {
 	char	*pth;
 	int		j;

@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/09 18:26:24 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/09 19:31:42 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/10 19:58:21 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	**ft_unsetenv(char **cmd, char **env)
 		while (env[++j])
 		{
 			if (!ft_strncmp(cmd[i], env[j], ft_strlen(cmd[i])))
-				break;
+				break ;
 		}
 		free(env[j]);
 		j--;

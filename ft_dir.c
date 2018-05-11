@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 20:17:30 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/10 18:55:54 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/10 19:55:24 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,10 @@ void		ft_cd(char **cmd, char **env, char *temp)
 	{
 		if (check_dir(cmd) != 1)
 		{
-		ft_strcpy(temp, ft_get_path(env, "HOME"));
-		ft_strcat(temp, &cmd[1][1]);
-		ft_strclr(cmd[1]);
-		ft_strcpy(cmd[1], temp);
+			ft_strcpy(temp, ft_get_path(env, "HOME"));
+			ft_strcat(temp, &cmd[1][1]);
+			ft_strclr(cmd[1]);
+			ft_strcpy(cmd[1], temp);
 		}
 	}
 	else if (check_dir(cmd) != 1)
@@ -39,7 +39,7 @@ void		ft_cd(char **cmd, char **env, char *temp)
 	}
 }
 
-int		check_dir(char **cmd)
+int			check_dir(char **cmd)
 {
 	struct stat	statbuf;
 
@@ -50,7 +50,7 @@ int		check_dir(char **cmd)
 	}
 	else if (access(cmd[1], X_OK) == -1 && cmd[1])
 	{
-			ft_printf("%s: Could not change directory\n", cmd[1]);
+		ft_printf("%s: Could not change directory\n", cmd[1]);
 		return (1);
 	}
 	else if (cmd[1] && stat(cmd[1], &statbuf))
@@ -63,10 +63,10 @@ int		check_dir(char **cmd)
 		ft_printf("%s: Could not change directory\n", cmd[1]);
 		return (1);
 	}
-	return (0);	
+	return (0);
 }
 
-char	*ft_get_path(char **env, char *name)
+char		*ft_get_path(char **env, char *name)
 {
 	int		i;
 	int		j;
