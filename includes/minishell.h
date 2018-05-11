@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 16:40:47 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/10 20:04:04 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/10 20:22:18 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,33 +31,33 @@
 # define NRM "\x1B[0m"
 
 void		process_args(char **cmd, char **env, char *temp);
-char		**read_input(void);
-char		**ft_getpath(char **envp);
 void		format_str(char **line);
 void		ft_cd(char **cmd, char **env, char *temp);
 void		ft_env(char **cmd, char **env, int len, int i);
 void		ft_echo(char **cmd, char **env);
+void		ft_cmd(char **cmd, char **env);
+void		ft_execute(char **cmd, char **env);
 void		echo_env(char *cmd, char **env);
 void		process_echo(char **cmd, char **env, int new_line);
 int			check_dir(char **cmd);
+char		**read_input(void);
+char		**ft_getpath(char **envp);
 char		*ft_get_path(char **env, char *name);
 char		*ft_cd_home(char **cmd, char **env, int flag);
 char		**cd_env_change(char *cmd, char **env, int i);
 char		**cd_env_change_2(char *temp, char **env);
 char		**cd_env_back(char *cmd, char **env, int i);
 char		**cd_env_old(char **env, int i);
-void		ft_cmd(char **cmd, char **env);
-void		ft_execute(char **cmd, char **env);
 char		*ft_findexec(char **paths, char *command);
 char		*find_exec_env(char **cmd, char **env);
 
 void		create_env(char ***env, char **envp);
+void		print_env(char **env);
+void		free_env(char **env);
 char		**ft_setenv(char **cmd, char **env);
 char		**ft_unsetenv(char **cmd, char **env);
 char		**set_name(char **cmd, char **env);
 char		**set_full(char **cmd, char **env);
 char		**modify_env(char **cmd, char **env, int i);
-void		print_env(char **env);
-void		free_env(char **env);
 
 #endif
