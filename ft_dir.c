@@ -6,20 +6,18 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 20:17:30 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/10 18:07:08 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/10 18:55:54 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		ft_cd(char **cmd, char **env)
+void		ft_cd(char **cmd, char **env, char *temp)
 {
-	char	*temp;
-
-	temp = NULL;
-	if (cmd[1] == 0 || ft_strcmp(cmd[1], "~") == 0 || ft_strcmp(cmd[1], "~/") == 0)
+	if (cmd[1] == 0 || ft_strcmp(cmd[1], "~") == 0 ||
+		ft_strcmp(cmd[1], "~/") == 0)
 	{
-		env = cd_env_change("", env);
+		env = cd_env_change("", env, -1);
 		chdir(ft_cd_home(cmd, env, 0));
 	}
 	else if (cmd[1] && ft_strcmp(cmd[1], "-") == 0)
@@ -28,17 +26,15 @@ void		ft_cd(char **cmd, char **env)
 	{
 		if (check_dir(cmd) != 1)
 		{
-		temp = (char*)ft_memalloc(PATH_MAX + 1);
 		ft_strcpy(temp, ft_get_path(env, "HOME"));
 		ft_strcat(temp, &cmd[1][1]);
 		ft_strclr(cmd[1]);
 		ft_strcpy(cmd[1], temp);
-		free(temp);
 		}
 	}
 	else if (check_dir(cmd) != 1)
 	{
-		env = cd_env_change(cmd[1], env);
+		env = cd_env_change(cmd[1], env, -1);
 		chdir(cmd[1]);
 	}
 }

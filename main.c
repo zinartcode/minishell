@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/10 18:16:36 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/10 18:20:22 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern char	**environ;
 
-void	process_args(char **cmd, char **env)
+void	process_args(char **cmd, char **env, char *temp)
 {
 	while (1)
 	{
@@ -26,7 +26,7 @@ void	process_args(char **cmd, char **env)
 			exit(0);
 		}
 		else if (cmd[0] && ft_strcmp(cmd[0], "cd") == 0)
-			ft_cd(cmd, env);
+			ft_cd(cmd, env, temp);
 		else if (cmd[0] && ft_strcmp(cmd[0], "env") == 0)
 			ft_env(cmd, env, 0, -1);
 		else if (cmd[0] && ft_strcmp(cmd[0], "setenv") == 0)
@@ -87,12 +87,15 @@ int		main(int ac, char **av, char **envp)
 {
 	char	**cmd;
 	char	**env;
+	char	*temp;
 
 	cmd = NULL;
+	temp = (char*)ft_memalloc(PATH_MAX + 1);
 	(void)ac;
 	(void)av;
 	create_env(&env, envp);
-	process_args(cmd, env);
+	process_args(cmd, env, temp);
 	free_env(env);
+	free(temp);
 	return (0);
 }

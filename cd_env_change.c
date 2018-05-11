@@ -6,28 +6,20 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 18:03:09 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/10 18:07:29 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/10 19:29:00 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**cd_env_change(char *cmd, char **env)
+char	**cd_env_change(char *cmd, char **env, int i)
 {
-	int		i;
 	char	*temp;
-	char	*old;
 
-	i = -1;
-	old = (char*)malloc(PATH_MAX + 1);
 	temp = (char*)malloc(PATH_MAX + 1);
-	old = ft_strcpy(old, "OLD");
-	// change PWD
 	while (env[++i])
-	{
 		if (!ft_strncmp(env[i], "PWD=", 4))
 			break ;
-	}
 	temp = ft_strcpy(temp, env[i]);
 	if  (cmd[0] == '/')
 	{
@@ -42,7 +34,18 @@ char	**cd_env_change(char *cmd, char **env)
 		ft_strcat(env[i], "/");
 		ft_strcat(env[i], cmd);
 	}
-	// change OLDPWD
+	env = cd_env_change_2(temp, env);
+	free(temp);
+	return (env);
+}
+
+char	**cd_env_change_2(char *temp, char **env)
+{
+	int		i;
+	char	*old;
+
+	old = (char*)malloc(PATH_MAX + 1);
+	old = ft_strcpy(old, "OLD");
 	i = -1;
 	while (env[++i])
 	{
@@ -53,9 +56,7 @@ char	**cd_env_change(char *cmd, char **env)
 	ft_strcat(old, temp);
 	ft_strcpy(env[i], old);
 	free(old);
-	free(temp);
 	return (env);
-	//fix cd ..
 }
 
 char		**cd_env_old(char **env, int i)
@@ -130,7 +131,7 @@ char	**cd_env_back(char *cmd, char **env, int i)
 		if (cmd[3] != 0 || cmd[3] != '\0')
 		{
 			pth = ft_strcpy(pth, &cmd[3]);
-			env = cd_env_change(pth, env);
+			env = cd_env_change(pth, env, -1);
 		}
 	}
 	free(pth);

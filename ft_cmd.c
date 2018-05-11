@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 21:08:33 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/10 15:11:36 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/10 19:41:03 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ void	ft_cmd(char **cmd, char **env)
 {
 	char	*folder;
 	pid_t	parent;
-	char	*error;
 	char	*temp;
 
-	error = ft_strdup("ft_minishell1: command not found: ");
 	temp = (char*)ft_memalloc(PATH_MAX + 1);
 	if (cmd[0])
 	{
@@ -41,11 +39,10 @@ void	ft_cmd(char **cmd, char **env)
 			else if (access(cmd[0], R_OK) == 0)
 				execve(cmd[0], cmd, env);
 			else
-				ft_putendl_fd(ft_strjoin(error, cmd[0]), 2);
+				ft_printf("ft_minishell1: command not found: ");
 			exit(0);
 		}
 	}
-	free(error);
 	free(temp);
 }
 
