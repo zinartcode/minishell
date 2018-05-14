@@ -24,8 +24,8 @@ void		ft_cd(char **cmd, char **env, char *temp)
 		cd_env_old(env, -1);
 	else if (ft_strncmp(cmd[1], "~/", 2) == 0 && cmd[1][2] != 0)
 	{
-			ft_strcpy(temp, ft_get_path(env, "HOME="));
-			ft_strcat(temp, &cmd[1][1]);
+		t_strcpy(temp, ft_get_path(env, "HOME="));
+		t_strcat(temp, &cmd[1][1]);
 		env = cd_env_change(temp, env, -1);
 		chdir(temp);
 	}
