@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 21:08:33 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/10 20:26:52 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/11 15:33:36 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ft_execute(char **cmd, char **env)
 		else if (access(cmd[0], R_OK) == 0)
 			execve(cmd[0], cmd, env);
 		else
-			ft_printf("ft_minishell1: command not found: ");
+			ft_printf("%s: command not found\n ", cmd[0]);
 		exit(0);
 	}
 }

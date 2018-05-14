@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 16:29:15 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/10 20:12:23 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/11 15:44:12 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	format_str(char **line)
 	while ((*line)[i] != 0)
 	{
 		if ((*line)[i] == '\t')
+			(*line)[i] = ' ';
+		if ((*line)[i] == '"' || (*line)[i] == '\'')
 			(*line)[i] = ' ';
 		i++;
 	}

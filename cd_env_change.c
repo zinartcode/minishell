@@ -29,6 +29,8 @@ char		**cd_env_change(char *cmd, char **env, int i)
 	}
 	else if (cmd[0] == '.')
 		env = cd_env_back(cmd, env, i);
+	else if (!ft_strncmp(&cmd[0], ft_get_path(env, "HOME="), 7))
+		ft_strcpy(env[i], &cmd[0]);
 	else
 	{
 		ft_strcat(env[i], "/");

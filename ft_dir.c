@@ -6,7 +6,7 @@
 /*   By: azinnatu <azinnatu@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/30 20:17:30 by azinnatu          #+#    #+#             */
-/*   Updated: 2018/05/10 19:55:24 by azinnatu         ###   ########.fr       */
+/*   Updated: 2018/05/11 16:58:10 by azinnatu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,10 @@ void		ft_cd(char **cmd, char **env, char *temp)
 		cd_env_old(env, -1);
 	else if (ft_strncmp(cmd[1], "~/", 2) == 0 && cmd[1][2] != 0)
 	{
-		if (check_dir(cmd) != 1)
-		{
-			ft_strcpy(temp, ft_get_path(env, "HOME"));
+			ft_strcpy(temp, ft_get_path(env, "HOME="));
 			ft_strcat(temp, &cmd[1][1]);
-			ft_strclr(cmd[1]);
-			ft_strcpy(cmd[1], temp);
-		}
+		env = cd_env_change(temp, env, -1);
+		chdir(temp);
 	}
 	else if (check_dir(cmd) != 1)
 	{
