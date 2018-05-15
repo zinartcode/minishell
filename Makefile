@@ -33,9 +33,6 @@ INC		= -I includes/
 OB1 = $(SRC:.c=.o)
 OBJ = $(SRCS:.c=.o)
 
-SRCDIR = srcs
-OBJDIR = objs
-
 OBJS = $(addprefix $(OBJDIR)/, $(OBJ))
 
 HEADER = minishell.h

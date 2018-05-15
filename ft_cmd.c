@@ -38,7 +38,13 @@ void	ft_execute(char *temp, char **cmd, char **env)
 
 	parent = fork();
 	if (parent > 0)
+	{
 		wait(0);
+		// if (access(temp, F_OK) == 0)
+		// 	execve(temp, cmd, env);
+		// else
+		// 	ft_printf("minishell: permission denied: %s\n", temp);
+	}
 	else
 	{
 		if ((folder = ft_findexec(ft_getpath(env), temp)))
