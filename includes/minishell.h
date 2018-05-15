@@ -36,7 +36,7 @@ void		ft_cd(char **cmd, char **env, char *temp);
 void		ft_env(char **cmd, char **env, int len, int i);
 void		ft_echo(char **cmd, char **env);
 void		ft_cmd(char **cmd, char **env);
-void		ft_execute(char **cmd, char **env);
+void		ft_execute(char *temp, char **cmd, char **env);
 void		echo_env(char *cmd, char **env);
 void		process_echo(char **cmd, char **env, int new_line);
 int			check_dir(char **cmd);
@@ -49,7 +49,7 @@ char		**cd_env_change_2(char *temp, char **env);
 char		**cd_env_back(char *cmd, char **env, int i);
 char		**cd_env_old(char **env, int i);
 char		*ft_findexec(char **paths, char *command);
-char		*find_exec_env(char **cmd, char **env);
+char		*find_exec_env(char *path, char **env);
 
 void		create_env(char ***env, char **envp);
 void		print_env(char **env);

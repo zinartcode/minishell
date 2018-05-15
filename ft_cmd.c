@@ -20,19 +20,15 @@ void	ft_cmd(char **cmd, char **env)
 	if (cmd[0])
 	{
 		if (cmd[0][0] == '$')
-		{
 			ft_strcpy(temp, &cmd[0][1]);
-			ft_strclr(cmd[0]);
-			ft_strcpy(cmd[0], temp);
-			free(temp);
-			ft_strcpy(cmd[0], find_exec_env(cmd, env));
-		}
-		ft_execute(cmd, env);
+		else
+			ft_strcpy(temp, cmd[0]);
+		ft_execute(temp, cmd, env);
 	}
 	free(temp);
 }
 
-void	ft_execute(char **cmd, char **env)
+void	ft_execute(char *temp, char **cmd, char **env)
 {
 	pid_t	parent;
 	char	*folder;
@@ -42,28 +38,28 @@ void	ft_execute(char **cmd, char **env)
 		wait(0);
 	else
 	{
-		if ((folder = ft_findexec(ft_getpath(env), cmd[0])))
-			execve(ft_strjoin(folder, cmd[0]), cmd, env);
-		else if (access(cmd[0], R_OK) == 0)
-			execve(cmd[0], cmd, env);
+		if ((folder = ft_findexec(ft_getpath(env), temp)))
+			execve(ft_strjoin(folder, temp), cmd, env);
+		else if (access(temp, R_OK) == 0)
+			execve(temp, cmd, env);
 		else
-			ft_printf("%s: command not found\n ", cmd[0]);
+			ft_printf("%s: command not found\n", cmd[0]);
 		exit(0);
 	}
 }
 
-char	*find_exec_env(char **cmd, char **env)
+char	*find_exec_env(char *path, char **env)
 {
 	int		i;
 	char	*temp;
 
 	i = -1;
 	temp = (char*)ft_memalloc(PATH_MAX + 1);
-	ft_strcat(cmd[0], "=");
+	ft_strcat(path, "=");
 	while (env[++i])
 	{
-		if (!ft_strncmp(cmd[0], env[i], ft_strlen(cmd[0])))
-			ft_strcpy(temp, ft_get_path(env, cmd[0]));
+		if (!ft_strncmp(path, env[i], ft_strlen(path)))
+			ft_strcpy(temp, ft_get_path(env, path));
 	}
 	return (temp);
 }
