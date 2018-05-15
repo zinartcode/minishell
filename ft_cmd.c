@@ -20,7 +20,10 @@ void	ft_cmd(char **cmd, char **env)
 	if (cmd[0])
 	{
 		if (cmd[0][0] == '$')
+		{
 			ft_strcpy(temp, &cmd[0][1]);
+			ft_strcpy(temp, find_exec_env(temp, env));
+		}
 		else
 			ft_strcpy(temp, cmd[0]);
 		ft_execute(temp, cmd, env);
