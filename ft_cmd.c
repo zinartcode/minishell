@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	ft_cmd(char **cmd, char **env)
+void	ft_cmd(char **cmd, char **env, char **envp)
 {
 	char	*temp;
 
@@ -26,31 +26,27 @@ void	ft_cmd(char **cmd, char **env)
 		}
 		else
 			ft_strcpy(temp, cmd[0]);
-		ft_execute(temp, cmd, env);
+		ft_execute(temp, cmd, env, envp);
 	}
 	free(temp);
 }
 
-void	ft_execute(char *temp, char **cmd, char **env)
+void	ft_execute(char *temp, char **cmd, char **env, char **envp)
 {
 	pid_t	parent;
 	char	*folder;
 
 	parent = fork();
 	if (parent > 0)
-	{
 		wait(0);
-		// if (access(temp, F_OK) == 0)
-		// 	execve(temp, cmd, env);
-		// else
-		// 	ft_printf("minishell: permission denied: %s\n", temp);
-	}
+	else if (access(temp, F_OK) != -1)
+		execve(temp, cmd, envp);
 	else
 	{
 		if ((folder = ft_findexec(ft_getpath(env), temp)))
 			execve(ft_strjoin(folder, temp), cmd, env);
 		else if (access(temp, R_OK) == 0)
-			execve(temp, cmd, env);
+			execve(temp, cmd, envp);
 		else
 			ft_printf("%s: command not found\n", cmd[0]);
 		exit(0);

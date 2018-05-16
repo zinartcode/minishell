@@ -30,13 +30,13 @@
 # define YEL "\x1B[33m"
 # define NRM "\x1B[0m"
 
-void		process_args(char **cmd, char **env, char *temp);
+void		process_args(char **cmd, char **env, char **envp, char *temp);
 void		format_str(char **line);
 void		ft_cd(char **cmd, char **env, char *temp);
 void		ft_env(char **cmd, char **env, int len, int i);
 void		ft_echo(char **cmd, char **env);
-void		ft_cmd(char **cmd, char **env);
-void		ft_execute(char *temp, char **cmd, char **env);
+void		ft_cmd(char **cmd, char **env, char **envp);
+void		ft_execute(char *temp, char **cmd, char **env, char **envp);
 void		echo_env(char *cmd, char **env);
 void		process_echo(char **cmd, char **env, int new_line);
 int			check_dir(char **cmd);
