@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	process_args(char **cmd, char **env, char **envp, char *temp)
+void	process_args(char **cmd, char **env, char *temp)
 {
 	while (1)
 	{
@@ -34,7 +34,7 @@ void	process_args(char **cmd, char **env, char **envp, char *temp)
 		else if (cmd[0] && ft_strcmp(cmd[0], "echo") == 0)
 			ft_echo(cmd, env);
 		else
-			ft_cmd(cmd, env, envp);
+			ft_cmd(cmd, env);
 		free_env(cmd);
 	}
 }
@@ -94,7 +94,7 @@ int		main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	create_env(&env, envp);
-	process_args(cmd, env, envp, temp);
+	process_args(cmd, env, temp);
 	free_env(env);
 	free(temp);
 	return (0);

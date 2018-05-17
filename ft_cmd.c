@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	ft_cmd(char **cmd, char **env, char **envp)
+void	ft_cmd(char **cmd, char **env)
 {
 	char	*temp;
 
@@ -26,12 +26,12 @@ void	ft_cmd(char **cmd, char **env, char **envp)
 		}
 		else
 			ft_strcpy(temp, cmd[0]);
-		ft_execute(temp, cmd, env, envp);
+		ft_execute(temp, cmd, env);
 	}
 	free(temp);
 }
 
-void	ft_execute(char *temp, char **cmd, char **env, char **envp)
+void	ft_execute(char *temp, char **cmd, char **env)
 {
 	pid_t	parent;
 	char	*folder;
@@ -40,13 +40,16 @@ void	ft_execute(char *temp, char **cmd, char **env, char **envp)
 	if (parent > 0)
 		wait(0);
 	else if (access(temp, F_OK) != -1)
-		execve(temp, cmd, envp);
+	{
+		if (execve(temp, cmd, env) == -1)
+			ft_printf("%s: command not found\n", cmd[0]);
+	}
 	else
 	{
 		if ((folder = ft_findexec(ft_getpath(env), temp)))
 			execve(ft_strjoin(folder, temp), cmd, env);
 		else if (access(temp, R_OK) == 0)
-			execve(temp, cmd, envp);
+			execve(temp, cmd, env);
 		else
 			ft_printf("%s: command not found\n", cmd[0]);
 		exit(0);
@@ -56,17 +59,15 @@ void	ft_execute(char *temp, char **cmd, char **env, char **envp)
 char	*find_exec_env(char *path, char **env)
 {
 	int		i;
-	char	*temp;
 
 	i = -1;
-	temp = (char*)ft_memalloc(PATH_MAX + 1);
 	ft_strcat(path, "=");
 	while (env[++i])
 	{
 		if (!ft_strncmp(path, env[i], ft_strlen(path)))
-			ft_strcpy(temp, ft_get_path(env, path));
+			ft_strcpy(path, ft_get_path(env, path));
 	}
-	return (temp);
+	return (path);
 }
 
 char	*ft_findexec(char **paths, char *command)

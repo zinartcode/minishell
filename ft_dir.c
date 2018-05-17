@@ -26,8 +26,13 @@ void		ft_cd(char **cmd, char **env, char *temp)
 	{
 		ft_strcpy(temp, ft_get_path(env, "HOME="));
 		ft_strcat(temp, &cmd[1][1]);
-		env = cd_env_change(temp, env, -1);
-		chdir(temp);
+		if (access(temp, F_OK) != -1)
+		{
+			env = cd_env_change(temp, env, -1);
+			chdir(temp);
+		}
+		else
+			ft_printf("%s: Could not change directory\n", cmd[1]);
 	}
 	else if (check_dir(cmd) != 1)
 	{
