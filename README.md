@@ -69,7 +69,7 @@ unsetenv FOO
 
 Echoing text to the standard output using 'echo':
 ```
-echo Hey  $USER "what is the meaning of life?"
+echo "Hey"  $USER 
 ```
 
 Changing the working directory using 'cd':
